@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: customer-report-calculation
+  profiles:
+    active: develop
+  jackson:
+    default-property-inclusion: non_null
+
+delay-in-millis:
+  options: [10, 30, 90, 200, 1000, 2000, 5000, 10000, 20000]
+
+logging:
+  level:
+    org.springframework: INFO
+
+server:
+  port: 8080
+  compression:
+    enabled: true
+    mime-types: application/json
+    min-response-size: 1024
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+#Open-feign client
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 10000
+        readTimeout: 20000
+        loggerLevel: basic

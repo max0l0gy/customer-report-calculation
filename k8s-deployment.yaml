@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: test
+  name: customer-report-calculation
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: customer-report-calculation
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: test
+  name: customer-report-calculation-deployment
+  labels:
+    app: customer-report-calculation
+spec:
+  selector:
+    matchLabels:
+      app: customer-report-calculation
+  strategy:
+    type: Recreate
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: customer-report-calculation
+    spec:
+      containers:
+        - name: customer-report-calculation
+          image: maxmorev/customer-report-calculation:latest
+          ports:
+            - containerPort: 8080
+              name: spring
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "256m" # 1/4 core
+            limits:
+              memory: "512Mi"
+              cpu: "500m" # 1/2 core
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 7
+            timeoutSeconds: 5
+            periodSeconds: 3
+            failureThreshold: 1
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 8
+            failureThreshold: 1
