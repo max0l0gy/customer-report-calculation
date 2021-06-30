@@ -1,2 +1,2 @@
 # customer-report-calculation
-Report calculation service
+Report calculation service. A part of reactive-experiment
