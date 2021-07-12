@@ -29,7 +29,8 @@ public class ReportsService {
                         .setSale(calculateSale(customerId))
                         .setProcessTimeInMillis(delay))
                 .delayElement(Duration.ofMillis(delay))
-                .subscribeOn(Schedulers.boundedElastic());
+//                .subscribeOn(Schedulers.boundedElastic())
+                ;
     }
 
 
