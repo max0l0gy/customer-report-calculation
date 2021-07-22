@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
-import reactor.core.scheduler.Scheduler;
 import reactor.core.scheduler.Schedulers;
 import ru.max0l0gy.customer.report.DelayConfiguration;
 import ru.max0l0gy.customer.report.domain.Report;
@@ -29,7 +28,7 @@ public class ReportsService {
                         .setSale(calculateSale(customerId))
                         .setProcessTimeInMillis(delay))
                 .delayElement(Duration.ofMillis(delay))
-//                .subscribeOn(Schedulers.boundedElastic())
+                .subscribeOn(Schedulers.boundedElastic())
                 ;
     }
 

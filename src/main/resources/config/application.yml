@@ -7,7 +7,7 @@ spring:
     default-property-inclusion: non_null
 
 delay-in-millis:
-  options: [10, 30, 90, 200, 1000, 2000, 5000]
+  options: [10, 20, 25, 30, 50, 90, 200, 300, 1000, 2000, 5000, 10000, 20000]
 
 logging:
   level:
