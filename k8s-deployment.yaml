@@ -31,7 +31,7 @@ spec:
     spec:
       containers:
         - name: customer-report-calculation
-          image: maxmorev/customer-report-calculation:latest
+          image: maxmorev/customer-report-calculation:0.0.6
           ports:
             - containerPort: 8080
               name: spring
